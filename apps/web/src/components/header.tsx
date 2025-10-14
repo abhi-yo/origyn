@@ -41,14 +41,6 @@ export default function Header() {
 										{label}
 									</Link>
 								))}
-								<a
-									href="http://localhost:4321"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="transition-colors hover:text-foreground/80 text-foreground/60"
-								>
-									Docs
-								</a>
 							</div>
 						</div>
 
@@ -76,14 +68,6 @@ export default function Header() {
 												{label}
 											</Link>
 										))}
-										<a
-											href="http://localhost:4321"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="text-sm text-muted-foreground/60 hover:text-foreground/80 transition-colors"
-										>
-											Docs
-										</a>
 									</nav>
 								</SheetContent>
 							</Sheet>
