@@ -1,0 +1,38 @@
+{
+  "name": "origyn",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:docs": "turbo -F docs dev",
+    "db:push": "turbo -F @origyn/db db:push",
+    "db:studio": "turbo -F @origyn/db db:studio",
+    "db:generate": "turbo -F @origyn/db db:generate",
+    "db:migrate": "turbo -F @origyn/db db:migrate"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "dotenv": "^17.2.2",
+    "lucide-react": "^0.487.0",
+    "motion": "^12.23.24",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "tsdown": "^0.15.5",
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "pnpm@8.9.2"
+}
