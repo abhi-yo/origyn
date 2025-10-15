@@ -14,6 +14,7 @@ export default function Header() {
 		{ to: "/", label: "Home" },
 		{ to: "/templates", label: "Templates" },
 		{ to: "/dashboard", label: "Dashboard" },
+		{ to: "http://localhost:4321", label: "Docs", external: true },
 	] as const;
 
 	return (
@@ -32,15 +33,27 @@ export default function Header() {
 								</span>
 							</Link>
 							<div className="hidden md:flex items-center gap-6 text-sm">
-								{links.map(({ to, label }) => (
-									<Link
-										key={to}
-										href={to}
-										className="transition-colors hover:text-foreground/80 text-foreground/60"
-									>
-										{label}
-									</Link>
-								))}
+								{links.map(({ to, label, external }) => 
+									external ? (
+										<a
+											key={to}
+											href={to}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="transition-colors hover:text-foreground/80 text-foreground/60"
+										>
+											{label}
+										</a>
+									) : (
+										<Link
+											key={to}
+											href={to}
+											className="transition-colors hover:text-foreground/80 text-foreground/60"
+										>
+											{label}
+										</Link>
+									)
+								)}
 							</div>
 						</div>
 
