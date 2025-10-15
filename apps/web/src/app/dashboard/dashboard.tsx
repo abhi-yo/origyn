@@ -20,6 +20,11 @@ const heroTemplates = [
     description: "Warm-toned hero with floating particle effects",
     path: "/templates/hero-warmth",
   },
+  {
+    name: "Etherea Hero",
+    description: "Mystical forest theme with floating particles and email capture",
+    path: "/templates/hero-etherea",
+  },
 ];
 
 export default function Dashboard({
@@ -113,17 +118,19 @@ export default function Dashboard({
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {heroTemplates.map((template) => (
-            <Card key={template.name} className="p-5 space-y-3 elevated-md border-0 transition-all hover:elevated-lg">
-              <div className="flex items-center justify-between">
-                <div className="font-medium text-base">{template.name}</div>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
-                  PRO
-                </span>
+            <Card key={template.name} className="p-5 elevated-md border-0 transition-all hover:elevated-lg flex flex-col">
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="font-medium text-base">{template.name}</div>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
+                    PRO
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {template.description}
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {template.description}
-              </p>
-              <div className="flex gap-2 mt-2">
+              <div className="flex gap-2 mt-3">
                 <Button size="sm" variant="outline" className="flex-1 elevated-sm transition-all hover:elevated-md h-9" asChild>
                   <Link href={template.path as any}>Preview</Link>
                 </Button>
