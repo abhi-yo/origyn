@@ -559,6 +559,192 @@ export function FloatingParticles() {
   return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 -z-5 opacity-70" />;
 }`,
   },
+  {
+    name: "Etherea Hero",
+    description: "Mystical forest with floating particles and email capture",
+    category: "Landing Page",
+    path: "/templates/hero-etherea",
+    isPro: true,
+    code: `"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import localFont from "next/font/local";
+
+const nocturneSerif = localFont({
+  src: [
+    {
+      path: "../../../public/nocturne-serif-font-family-1760502816-0/NocturneSerifTest-Regular-uploaded-63b633de2e1c7.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-nocturne-serif",
+  display: "swap",
+});
+
+function BackgroundImage() {
+  return (
+    <div className="absolute inset-0 -z-10">
+      <Image
+        src="https://i.postimg.cc/VvFTZtS7/background.jpg"
+        alt="Mystical forest background"
+        fill
+        priority
+        quality={90}
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-black/40"></div>
+    </div>
+  );
+}
+
+function FloatingParticles() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (typeof window === 'undefined' || !canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+    }> = [];
+
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 0.2,
+      });
+    }
+
+    function animate() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = \`rgba(255, 255, 255, \${p.opacity})\`;
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[5] opacity-50" />;
+}
+
+export function HeroEtherea() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <main className="relative min-h-screen w-full overflow-hidden bg-black text-white"
+          style={{ colorScheme: 'dark' }}>
+      <div className="absolute inset-0 z-0 opacity-75">
+        <BackgroundImage />
+      </div>
+
+      <FloatingParticles />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4">
+        <header className="flex items-center justify-between py-5 px-2 sm:px-0">
+          <div className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-neutral-300">
+              <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm0 1.5a8.25 8.25 0 1 0 0 16.5 8.25 8.25 0 0 0 0-16.5Z" clipRule="evenodd" />
+            </svg>
+            <span className="text-xl font-semibold tracking-tight text-neutral-100">Etherea</span>
+          </div>
+
+          <nav className="hidden md:block">
+            <ul className="flex items-center space-x-8">
+              <li><Link href="#" className="text-base font-normal tracking-wide text-neutral-200 opacity-75 hover:opacity-100">How It Works</Link></li>
+              <li><Link href="#" className="text-base font-normal tracking-wide text-neutral-200 opacity-75 hover:opacity-100">Pricing</Link></li>
+              <li><Link href="#" className="text-base font-normal tracking-wide text-neutral-200 opacity-75 hover:opacity-100">FAQ</Link></li>
+            </ul>
+          </nav>
+          
+          <Link href="#" className="hidden md:flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur-sm hover:bg-white/20">
+            Log In
+          </Link>
+
+          <button 
+            className="md:hidden rounded-md p-1 text-neutral-300 hover:bg-white/10"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? "✕" : "☰"}
+          </button>
+        </header>
+
+        <div className="flex flex-1 flex-col items-center justify-center py-12 text-center">
+          <h1 className={\`\${nocturneSerif.className} max-w-4xl text-4xl font-normal leading-tight text-neutral-200 sm:text-5xl md:text-6xl lg:text-7xl\`}>
+            <span className="block mb-2">Shape Atmosphere.</span>
+            <span className="block">Infinite Soundscapes.</span>
+          </h1>
+          
+          <p className="mt-6 mb-8 text-base font-normal max-w-xl text-white/85">
+            Craft unique soundscapes with AI. Find focus, achieve calm, or escape in infinitely evolving ambient audio.
+          </p>
+
+          <div className="w-full max-w-md">
+            <form className="flex flex-col space-y-4 sm:flex-row sm:space-x-1.5 sm:space-y-0">
+              <Input
+                type="email"
+                placeholder="Enter your email..."
+                className="h-12 flex-1 rounded-full border border-white/15 bg-white/15 pl-6 text-white placeholder:text-white/50"
+              />
+              <Button className="h-12 rounded-full bg-zinc-900 px-5 text-white hover:bg-zinc-800">
+                Join Waitlist
+              </Button>
+            </form>
+          </div>
+        </div>
+
+        <footer className="pt-16 pb-10 text-center">
+          <p className="mx-auto max-w-2xl text-xs font-normal leading-relaxed opacity-90">
+            Etherea uses generative AI to create unique ambient soundscapes tailored to your mood or activity.
+          </p>
+        </footer>
+      </div>
+    </main>
+  );
+}`,
+  },
 ];
 
 export default function TemplatesPage() {
@@ -575,7 +761,7 @@ export default function TemplatesPage() {
             <h2 className="text-xl font-medium">Hero Sections</h2>
             <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Pro</span>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {heroTemplates.map((template) => (
               <Card key={template.name} className="p-4 elevated-sm border-0 flex flex-col">
                 <div className="flex-1 space-y-3">
