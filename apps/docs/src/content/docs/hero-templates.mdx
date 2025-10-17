@@ -1,109 +1,68 @@
 ---
-title: Hero Templates Guide
-description: Details about the 3 hero templates
+title: Customization
+description: How to customize your hero
 ---
 
-# The 3 Hero Templates
+# Customizing Your Hero
 
-## Template 1: Serene Hero
+## Change Text
 
-**Style:**
-- Light, clean design
-- Blurred background image
-- Centered text and buttons
-- Minimal navigation
+**Headline:**
+```tsx
+<h1>Your New Headline</h1>
+```
 
-**Best for:**
-- Business websites
-- SaaS products
-- Professional services
-- Agencies
+**Description:**
+```tsx
+<p>Your new description text here</p>
+```
 
-**Features:**
-- Background image with blur effect
-- Two CTA buttons
-- Responsive navigation
-- Custom font (Instrument Serif for headline)
+**Buttons:**
+```tsx
+<Button>Your Button Text</Button>
+```
 
-**What to customize:**
-- Headline text
-- Description text
-- Button text and links
-- Background image URL
-- Logo/brand name
+## Change Colors
 
-## Template 2: Serenity Hero
+Replace color classes:
+- `bg-purple-500` → `bg-blue-500`
+- `text-orange-900` → `text-gray-900`
+- `border-white/20` → `border-black/20`
 
-**Style:**
-- Dark theme
-- Purple gradient orbs
-- Glowing button effect
-- Animated background
+## Change Images
 
-**Best for:**
-- Tech products
-- Apps and software
-- Creative agencies
-- Modern brands
+Find and replace the image URL:
+```tsx
+src="https://your-image-url.com/image.jpg"
+```
 
-**Features:**
-- Animated gradient orbs
-- Custom glow button
-- Mobile menu
-- Smooth animations
+## Change Links
 
-**What to customize:**
-- All text content
-- Button links
-- Purple colors (change to your brand)
-- Navigation menu items
+Replace all placeholder links:
+```tsx
+href="/your-page"
+```
 
-## Template 3: Warmth Hero
+## Change Fonts
 
-**Style:**
-- Warm orange/amber colors
-- Floating particle animation
-- Nature-inspired
-- Soft, welcoming feel
+The templates use Google Fonts. To change:
 
-**Best for:**
-- Food and restaurants
-- Wellness brands
-- Lifestyle products
-- Creative services
+```tsx
+import { YourFont } from "next/font/google";
 
-**Features:**
-- Canvas particle animation (50 particles)
-- Warm color palette
-- Blurred background
-- Smooth hover effects
+const yourFont = YourFont({ subsets: ["latin"] });
+```
 
-**What to customize:**
-- Headlines and text
-- Button links
-- Warm colors (change to your palette)
-- Background image
-- Brand name
+Then apply:
+```tsx
+<h1 className={yourFont.className}>Headline</h1>
+```
 
-## How to Use
+## Remove Features
 
-1. Go to [Templates](http://localhost:3001/templates)
-2. Preview each template
-3. Click "Get Code" on your choice
-4. Copy the entire code
-5. Paste into your project
-6. Update the text and links
+Don't need something? Just delete that code block:
+- Remove navigation - delete the `<nav>` section
+- Remove buttons - delete the `<Button>` components
+- Remove animations - delete animation-related code
 
-## Customization Tips
-
-**Change text:**
-Look for strings in quotes and replace them.
-
-**Change colors:**
-Find color classes like `bg-purple-500` or `text-orange-900` and replace with your brand colors.
-
-**Change images:**
-Find `backgroundImage` or `src` properties and update the URL.
-
-**Change links:**
-Find `href="#"` and replace with your actual page URLs.
+That's all you need to know!

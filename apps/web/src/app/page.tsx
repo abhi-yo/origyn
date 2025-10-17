@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef } from "react";
+import { authClient } from "@/lib/auth-client";
 
 // Add a cute, neutral 8-bit graphic with a subtle wireframe mesh background.
 // It uses currentColor so it adapts to light/dark themes automatically.
@@ -123,6 +124,7 @@ function PixelArtPanel() {
 }
 
 export default function Home() {
+  const { data: session } = authClient.useSession();
   return (
     <main className="container mx-auto max-w-7xl px-6 md:px-24 py-24 md:py-28">
       {/* Hero */}
@@ -130,20 +132,20 @@ export default function Home() {
       <section className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
         <div className="max-w-3xl">
           <h1 className="heading text-4xl md:text-5xl font-medium tracking-tight leading-[1.08] -mt-12">
-            Premium Hero Sections
+            Copy-Paste Hero Sections That Convert
           </h1>
           <p className="mt-4 text-base md:text-lg text-muted-foreground/90 leading-relaxed">
-            Beautiful, production-ready hero sections
+            Beautiful heroes in 60 seconds.
           </p>
           <p className="mt-3 text-sm md:text-base text-muted-foreground/80 leading-7 md:leading-8 max-w-prose [text-wrap:balance]">
-            Copy-paste ready hero section templates for your landing pages. Built with Next.js, Tailwind CSS, and modern web standards.
+            Copy‑paste hero sections developers actually want to use. Pro only. No free downloads.
           </p>
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Button className="elevated-md transition-all hover:elevated-lg h-10 md:h-11 px-6 md:px-7" asChild>
               <Link href="/templates">Browse Templates</Link>
             </Button>
             <Button variant="outline" className="elevated-sm transition-all hover:elevated-md h-10 md:h-11 px-6 md:px-7" asChild>
-              <Link href="/dashboard">Get Access</Link>
+              <Link href="/dashboard">{session?.user ? "Go to Dashboard" : "Get Pro Access"}</Link>
             </Button>
           </div>
         </div>
@@ -263,9 +265,12 @@ export default function Home() {
             <p className="text-muted-foreground">
               Get instant access to all premium hero section templates
             </p>
-            <div className="pt-4">
-              <Button className="elevated-md hover:elevated-lg" size="lg" asChild>
-                <Link href="/dashboard">Get Pro Access</Link>
+            <div className="flex items-center justify-center gap-4 pt-2">
+              <Button className="elevated-md transition-all hover:elevated-lg h-10 md:h-11 px-6 md:px-7" asChild>
+                <Link href="/templates">Browse Templates</Link>
+              </Button>
+              <Button variant="outline" className="elevated-sm transition-all hover:elevated-md h-10 md:h-11 px-6 md:px-7" asChild>
+                <Link href="/dashboard">{session?.user ? "Go to Dashboard" : "Get Pro Access"}</Link>
               </Button>
             </div>
           </div>

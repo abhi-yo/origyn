@@ -8,13 +8,31 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 export default function Header() {
-	const links = [
-		{ to: "/", label: "Home" },
-		{ to: "/templates", label: "Templates" },
-		{ to: "/dashboard", label: "Dashboard" },
-		{ to: "http://localhost:4321", label: "Docs", external: true },
+	const { data: session } = authClient.useSession();
+	
+	// Public routes - always visible
+	const publicLinks = [
+		{ to: "/" as const, label: "Home" },
+		{ to: "/pricing" as const, label: "Pricing" },
+	] as const;
+	
+	// Protected routes - only show when logged in
+	const protectedLinks = [
+		{ to: "/templates" as const, label: "Templates" },
+		{ to: "/dashboard" as const, label: "Dashboard" },
+	] as const;
+	
+	// Combine links based on auth status
+	const internalLinks = session?.user 
+		? [...publicLinks, ...protectedLinks]
+		: publicLinks;
+
+	// External links rendered with <a>
+	const externalLinks = [
+		{ to: "http://localhost:4321" as const, label: "Docs" },
 	] as const;
 
 	return (
@@ -33,27 +51,26 @@ export default function Header() {
 								</span>
 							</Link>
 							<div className="hidden md:flex items-center gap-6 text-sm">
-								{links.map(({ to, label, external }) => 
-									external ? (
-										<a
-											key={to}
-											href={to}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="transition-colors hover:text-foreground/80 text-foreground/60"
-										>
-											{label}
-										</a>
-									) : (
-										<Link
-											key={to}
-											href={to}
-											className="transition-colors hover:text-foreground/80 text-foreground/60"
-										>
-											{label}
-										</Link>
-									)
-								)}
+								{internalLinks.map(({ to, label }) => (
+									<Link
+										key={to}
+										href={to as any}
+										className="transition-colors hover:text-foreground/80 text-foreground/60"
+									>
+										{label}
+									</Link>
+								))}
+								{externalLinks.map(({ to, label }) => (
+									<a
+										key={to}
+										href={to}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="transition-colors hover:text-foreground/80 text-foreground/60"
+									>
+										{label}
+									</a>
+								))}
 							</div>
 						</div>
 
@@ -72,14 +89,25 @@ export default function Header() {
 								</SheetTrigger>
 								<SheetContent side="right" className="w-[240px] sm:w-[300px]">
 									<nav className="flex flex-col space-y-4">
-										{links.map(({ to, label }) => (
+										{internalLinks.map(({ to, label }) => (
 											<Link
 												key={to}
-												href={to}
+												href={to as any}
 												className="text-sm text-muted-foreground/60 hover:text-foreground/80 transition-colors"
 											>
 												{label}
 											</Link>
+										))}
+										{externalLinks.map(({ to, label }) => (
+											<a
+												key={to}
+												href={to}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="text-sm text-muted-foreground/60 hover:text-foreground/80 transition-colors"
+											>
+												{label}
+											</a>
 										))}
 									</nav>
 								</SheetContent>

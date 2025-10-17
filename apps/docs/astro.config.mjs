@@ -6,8 +6,8 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Hero Templates',
-			description: 'Beautiful hero sections for your website',
+			title: 'Hero Templates Docs',
+			description: 'How to use your hero template code',
 			defaultLocale: 'root',
 			locales: {
 				root: {
@@ -20,10 +20,10 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Hero Templates',
+					label: 'Documentation',
 					items: [
-						{ label: 'Start Here', slug: 'quick-start-hero' },
-						{ label: 'The 3 Templates', slug: 'hero-templates' },
+						{ label: 'How to Use', slug: 'quick-start-hero' },
+						{ label: 'Customization', slug: 'hero-templates' },
 					],
 				},
 			],

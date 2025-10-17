@@ -1,61 +1,115 @@
 ---
-title: Quick Start Guide
-description: Get a hero section in 5 simple steps
+title: How to Use
+description: Using your copied hero code
 ---
 
-# Get a Hero Section in 5 Steps
+# How to Use Your Hero Template
 
-## Step 1: Sign Up
+Follow these simple steps. No coding experience needed!
 
-1. Go to [localhost:3001](http://localhost:3001)
-2. Click "Dashboard"
-3. Create an account with your email
-4. Verify your email
+## Step 1: Create a Next.js Project
 
-## Step 2: Get Pro Access
+Open your computer's terminal (on Mac: press `Cmd + Space`, type "Terminal") and run:
 
-1. Click "Dashboard" in the menu
-2. Click "Upgrade to Pro"
-3. Complete payment
-4. Now you can access all templates
+```bash
+npx create-next-app@latest my-website
+```
 
-## Step 3: Pick a Template
+When it asks questions, just press Enter for each one to use defaults.
 
-1. Go to [Templates](http://localhost:3001/templates)
-2. See the 3 hero options:
-   - **Serene** - Clean, light background
-   - **Serenity** - Dark with purple glow  
-   - **Warmth** - Warm colors, animated
-3. Click "Preview" to see each one
-4. Choose the one you like
+Then go into your project folder:
 
-## Step 4: Get the Code
+```bash
+cd my-website
+```
 
-1. Click "Get Code" on your template
-2. Copy all the code
-3. Done!
+## Step 2: Install Required Packages
 
-## Step 5: Use It
+Copy and paste this command into your terminal:
 
-### If you have a Next.js website:
-1. Create a new file: `components/hero.tsx`
-2. Paste the code
-3. Import it in your page: `import { Hero } from '@/components/hero'`
-4. Add `<Hero />` where you want it
+```bash
+npm install @radix-ui/react-dropdown-menu lucide-react
+```
 
-### If you use other tools:
-1. Paste the code into your project
-2. Change the text and colors
-3. Ask a developer if you need help
+Wait for it to finish (you'll see green text when done).
 
-## Change the Text
+## Step 3: Create Your Hero File
 
-Find and replace:
-- Headlines - the big text
-- Description - smaller text below
-- Button text
-- Menu items
+1. Open your project in a code editor (VS Code is free and easy)
+2. Find the `src` folder on the left
+3. Inside `src`, create a new folder called `components`
+4. Inside `components`, create a new file called `hero.tsx`
+5. Paste the hero code you copied from our website
 
-## Questions?
+## Step 4: Add the Hero to Your Homepage
 
-Check the [Templates Guide](/hero-templates/) for more details about each hero design.
+1. Open the file `src/app/page.tsx`
+2. Delete everything in that file
+3. Paste this simple code:
+
+```tsx
+import { HeroSerene } from '@/components/hero'
+
+export default function Home() {
+  return <HeroSerene />
+}
+```
+
+**Note:** Change `HeroSerene` to match your hero name:
+- Copied Serene Hero? Use `HeroSerene`
+- Copied Serenity Hero? Use `HeroSerenity`
+- Copied Warmth Hero? Use `HeroWarmth`
+- Copied Etherea Hero? Use `HeroEtherea`
+
+## Step 5: See Your Website
+
+In the terminal, type:
+
+```bash
+npm run dev
+```
+
+Then open your web browser and go to: `http://localhost:3000`
+
+You should see your hero section! 🎉
+
+## Step 6: Customize the Text
+
+Open `src/components/hero.tsx` and look for text in quotes:
+
+**Change the headline:**
+Look for the big text between `<h1>` and `</h1>` tags. Replace it with your text.
+
+**Change the description:**
+Look for smaller text between `<p>` and `</p>` tags. Replace it with your text.
+
+**Change button text:**
+Look for text inside `<Button>` tags. Replace it with your text.
+
+## Step 7: Update Links
+
+Look for `href="#"` in your code. Replace the `#` with your actual page links:
+
+```tsx
+href="/about"      // Links to your about page
+href="/pricing"    // Links to your pricing page
+href="/contact"    // Links to your contact page
+```
+
+## Step 8: Change Colors (Optional)
+
+Find color codes like `bg-purple-500` or `text-blue-600` and replace them:
+
+- `bg-blue-500` = blue background
+- `bg-green-500` = green background
+- `text-red-500` = red text
+- `text-gray-900` = dark gray text
+
+## That's It!
+
+Your hero section is now live on your website. Every time you save changes in your code editor, the website updates automatically.
+
+**Need help?** Most beginners struggle with:
+- Making sure you're in the right folder (use `cd my-website`)
+- Typos in file names (double-check spelling)
+- Missing packages (just run the install command again)
